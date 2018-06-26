@@ -1,13 +1,24 @@
 import psychopy.event
 import psychopy.core
 import psychopy.visual
+import psychopy.gui
 
+# subject info window
+gui = psychopy.gui.Dlg()
+gui.addField("Subject ID:")
+gui.addField("Age:")
+gui.addField("Gender:")
+gui.show()
+
+# saving subject info
+subj_id = gui.data[0]
+subj_age = gui.data[1]
+subj_gender = gui.data[2]
 
 
 # window
 win = psychopy.visual.Window(
-        size=[400, 400],
-        units="pix",
+        units = "pix",
         fullscr=True
 )
 
