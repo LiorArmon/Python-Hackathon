@@ -1,0 +1,30 @@
+class game:
+
+    def __init__(self, data_frame, no_of_blocks, break_interval, win):
+        self.data_frame = data_frame
+        self.no_of_blocks = no_of_blocks
+        self.break_interval = break_interval
+        self.win = win
+
+    sbdm = SBDM_data(self.data_frame)
+    stim_list = sbdm.create_stim_list()
+
+    def run_game(self):
+        for block in range(self.no_of_blocks):
+            block = block(stim_list)
+            block.run_block()
+            if mod(block/self.break_interval) == 0
+
+                #load the break instructions image
+                img = psychopy.visual.ImageStim(
+                    win=self.win,
+                    image=os.path.normpath("Images/break.bmp"),  # opens a break instructions picture from Images folder
+                )
+
+                #draw the break instructions image
+                img.draw()
+                win.flip()
+
+                psychopy.event.waitKeys(keyList=['space'])
+
+
