@@ -15,6 +15,7 @@ class Trial:
         self.cue = cue
         self.success_count = success_count
         self.failure_count = failure_count
+        self.win = win
         self.success = ()
         self.RT = ()
         
@@ -37,7 +38,9 @@ class Trial:
                 win=win,
                 image=os.path.normpath("Images/"+self.stimulus.name), #opens a picture from Images folder
                 units="pix",
-                size=[self.stim_size])
+                size=[self.stim_size],
+                pos = self.stim_position
+            )
             
             
             #draw stimulus image
@@ -49,10 +52,10 @@ class Trial:
             #Cue section
             if self.stimulus.cued: #if the stimulus is set to be cued
                 
-                pre_que = self.pre_cue+self.success*0.06-self.failure*0.05
-                if pre_que < 0: # so the cue doesn't show before the picture
-                    pre_que = 0
-                elif pre_que > self.stim_time + self.itis: # so the cue doesn't show too late
+                pre_cue = self.pre_cue+self.success_count*0.016-self.failure_count*0.05
+                if pre_cue < 0: # so the cue doesn't show before the picture
+                    pre_cue = 0
+                elif pre_cue > self.stim_time + self.itis: # so the cue doesn't show too late
                     pre_cue = self.stim_time + self.itis
                 
                 psychopy.core.wait(pre_cue) #wait until cue
@@ -64,19 +67,31 @@ class Trial:
                     self.cue.draw()
             
             else:
-                pre_que = 0 #if the stimulus is not cued, just display it for 1 sec
+                pre_cue = 0 #if the stimulus is not cued, just display it for 1 sec
                 
             self.RT = psychopy.event.getKeys(timeStamped=clock)[1] #records the RT for a button press
             
-            psychopy.core.wait(stim_time-pre_que)
+            psychopy.core.wait(stim_time-pre_cue)
             
         #draw fixation cross - Inter Trial Interval
         fixation.draw()
         win.flip()
         psychopy.core.wait(self.iti) #show cross for the amount of time set in ITI
+
+        if self.RT < (self.stim_time - pre_cue)+self.itis:
+            self.success = 1
+        else:
+            self.success = 0
+
     
         elif self.stimulus.still: #if stimulus is instructions, it just waits for a space bar hit to continue
             psychopy.event.waitKeys(keyList = ['space'])
+
+            # draw fixation cross - Inter Trial Interval
+            fixation.draw()
+            win.flip()
+            psychopy.core.wait(self.iti)  # show cross for the amount of time set in ITI
+
         else:
              psychopy.core.wait(0) # if the stimulus is not set to be shown, just skip this trial
             
