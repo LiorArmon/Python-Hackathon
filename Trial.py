@@ -68,8 +68,10 @@ class Trial:
             
             else:
                 pre_cue = 0 #if the stimulus is not cued, just display it for 1 sec
-                
-            self.RT = psychopy.event.getKeys(timeStamped=clock)[1] #records the RT for a button press
+
+
+            keys = psychopy.event.getKeys(timeStamped=clock)
+            self.RT = keys[1] #records the RT for a button press
             
             psychopy.core.wait(stim_time-pre_cue) #wait for the remaining time after the cue until the stimulus disappears
             
@@ -96,7 +98,7 @@ class Trial:
              psychopy.core.wait(0) # if the stimulus is not set to be shown, just skip this trial
 
     def get_trial_data(self)
-        return self.RT, self.success
+        return self.stimulus.name, self.RT, self.success, keys[0]
             
    
             
