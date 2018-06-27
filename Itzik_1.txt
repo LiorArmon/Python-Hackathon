@@ -1,0 +1,6 @@
+snickers.jpg 1 1
+mars.jpg 1 0
+kitkat.jpg 1 0
+doritos.jpg 0 0
+bisli.jpg 1 1
+bamba.jpg 1 0

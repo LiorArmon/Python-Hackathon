@@ -25,7 +25,8 @@ subj_gender = gui.data[2]
 # window
 win = psychopy.visual.Window(
         units = "pix",
-        fullscr=True
+        size = (1000, 1000),
+        fullscr=False
 )
 
 # fixation cross
@@ -44,6 +45,7 @@ for image in images: #repeat for each image in the folder
             image=os.path.normpath("Images/"+image), #opens a picture from Images folder
             units="pix",
             size=[400,400])
+
     
     #draw fixation cross
     fixation.draw()
@@ -61,6 +63,12 @@ for image in images: #repeat for each image in the folder
 # need to add a condition - if in the stimulus data frame, boolean is True do this:
     #sound
     s=psychopy.sound.Sound(value="G", secs=0.1) #creates a sound
+    #if play:
+    3.0..0
+    .
+    .
+    00
+    00.0
     s.play() #plays the sound
     keys = psychopy.event.getKeys(keyList = ["b"], timeStamped=clock) #records the RT for a button press
     psychopy.core.wait(0.3)
