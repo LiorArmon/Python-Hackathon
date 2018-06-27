@@ -96,7 +96,7 @@ class Trial:
              psychopy.core.wait(0) # if the stimulus is not set to be shown, just skip this trial
 
     def get_trial_data(self)
-        return self.RT, self.success
+        return self.stimulus.name, self.RT, self.success
             
    
             

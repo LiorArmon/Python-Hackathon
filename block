@@ -12,7 +12,7 @@ class block:
     for stim in stim_list:
 
 
-        if trial.get_trial_data[1] == 1
+        if trial.get_trial_data[2] == 1
             self.succes_count+1
         else:
             self.failure_count+1
