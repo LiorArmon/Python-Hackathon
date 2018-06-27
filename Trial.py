@@ -52,36 +52,36 @@ class Trial:
             #Cue section
             if self.stimulus.cued: #if the stimulus is set to be cued
                 
-                pre_cue = self.pre_cue+self.success_count*0.016-self.failure_count*0.05
+                pre_cue = self.pre_cue+(self.success_count*0.016)-(self.failure_count*0.05)
                 if pre_cue < 0: # so the cue doesn't show before the picture
                     pre_cue = 0
                 elif pre_cue > self.stim_time + self.itis: # so the cue doesn't show too late
                     pre_cue = self.stim_time + self.itis
                 
                 psychopy.core.wait(pre_cue) #wait until cue
-                clock = psychopy.core.Clock() #if the stimulus is cued restart the clock
+                clock = psychopy.core.Clock() #if the stimulus is cued restart the clock when the cue appears
             
                 if self.cue.cue_type == 'sound': #if the cue is set to be a sound
                     self.cue.play() #plays the sound
                 elif self.cue.cue_type == 'image': #if the cue is set to be an image
-                    self.cue.draw()
+                    self.cue.draw() #display the cue
             
             else:
                 pre_cue = 0 #if the stimulus is not cued, just display it for 1 sec
                 
             self.RT = psychopy.event.getKeys(timeStamped=clock)[1] #records the RT for a button press
             
-            psychopy.core.wait(stim_time-pre_cue)
+            psychopy.core.wait(stim_time-pre_cue) #wait for the remaining time after the cue until the stimulus disappears
             
-        #draw fixation cross - Inter Trial Interval
-        fixation.draw()
-        win.flip()
-        psychopy.core.wait(self.iti) #show cross for the amount of time set in ITI
+            #draw fixation cross - Inter Trial Interval
+            fixation.draw()
+            win.flip()
+                psychopy.core.wait(self.iti) #show cross for the amount of time set in ITI
 
-        if self.RT < (self.stim_time - pre_cue)+self.itis:
-            self.success = 1
-        else:
-            self.success = 0
+            if self.RT < (self.stim_time - pre_cue)+self.itis:
+                self.success = 1
+            else:
+                self.success = 0
 
     
         elif self.stimulus.still: #if stimulus is instructions, it just waits for a space bar hit to continue
