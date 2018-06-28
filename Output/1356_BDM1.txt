@@ -1,0 +1,7 @@
+Trial	StimName	Bid	RT
+1	mars.jpg	7.5777777777777775	2640
+2	bisli.jpg	2.6444444444444444	1520
+3	bamba.jpg	7.2	1752
+4	doritos.jpg	1.8444444444444446	3879
+5	kitkat.jpg	6.933333333333334	2639
+6	snickers.jpg	8.4	2102

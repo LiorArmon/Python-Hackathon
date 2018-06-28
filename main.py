@@ -48,14 +48,3 @@ game.win.close()
 res_df = game.get_final_results()
 res_df.to_csv("res_df") #todo take from params
 
-
-
-
-
-
-
-# window
-# win = psychopy.visual.Window(
-#         units = "pix",
-#         fullscr=True
-# )

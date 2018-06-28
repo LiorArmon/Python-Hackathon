@@ -146,6 +146,7 @@ def main(subjid):
         intertrial(screen, font2, white, width, height)
         trial=trial+1
     end(screen, font2, width, height, yellow)
+    pygame.quit()
     return output_file_path
 
 

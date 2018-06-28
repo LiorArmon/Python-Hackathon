@@ -11,7 +11,7 @@ def create_psychopy_window():
     win = psychopy.visual.Window(
         units = "pix",
         size = (200, 200), 
-        fullscr=False) #todo change to True
+        fullscr=True) #todo change to True
     return win
 
 def create_fixation_cross(win):

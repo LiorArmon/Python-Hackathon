@@ -17,12 +17,12 @@ class SBDM_Data:
         self.df = df
 
     def create_stim_list(self):
-        snack_names = self.df['StimName'].tolist()
+        snack_names = self.df.index.values
         print(snack_names)
         stimlist = []
         for idx, stim in enumerate(snack_names):
-            show = self.df[self.df["StimName"] == stim]["show"]
-            cued = self.df[self.df["StimName"] == stim]["cued"]
+            show = self.df['show'][idx]
+            cued = self.df['cued'][idx]
             A = Stimulus(name=stim, show=show, cued=cued)
             stimlist.append(A)
         return stimlist
