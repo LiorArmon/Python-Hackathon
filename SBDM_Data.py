@@ -21,8 +21,8 @@ class SBDM_Data:
         print(snack_names)
         stimlist = []
         for idx, stim in enumerate(snack_names):
-            show = self.df['show'][idx]
-            cued = self.df['cued'][idx]
+            show = self.df[self.df["StimName"] == stim]["show"]
+            cued = self.df[self.df["StimName"] == stim]["cued"]
             A = Stimulus(name=stim, show=show, cued=cued)
             stimlist.append(A)
         return stimlist

@@ -45,7 +45,7 @@ class Sort_By_BDM:
         with open(self.text_file_path) as file:
             df = pd.read_table(file, index_col=0)
         # creating a dataframe with the stimulus name as index (image name) and sorted by ranking
-        df.set_index('StimName', inplace=True)
+        #df.set_index('StimName', inplace=True)
         df.pop('RT')
         self.sorted_df = df.sort_values('Bid', ascending=0)
 

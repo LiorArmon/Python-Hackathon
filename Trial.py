@@ -13,9 +13,9 @@ class Trial:
         self.pre_cue = self.params.get('pre_cue')
         self.stim_time = self.params['stim_time']
         self.iti = self.params['iti']
-        self.itis = self.params['itis'] #todo rename, this is time after pic disappears that still defines as success
+        self.success_window = self.params['success_window'] # this is time after pic disappears that still defines as success
         self.stim_size = self.params['stim_size']
-        self.stim_position = tuple(self.params['stim_position'])
+        self.stim_position = tuple(self.params['stim Position'])
         self.cue = cue
         self.success_count = success_count
         self.failure_count = failure_count
@@ -47,19 +47,18 @@ class Trial:
             img.draw()
             win.flip()
             clock = psychopy.core.Clock()  # start the clock
-
             # Cue section
             if self.stimulus.cued:  # if the stimulus is set to be cued
 
                 pre_cue = self.pre_cue + (self.success_count * 0.016) - (self.failure_count * 0.05)
                 if pre_cue < 0:  # so the cue doesn't show before the picture
                     pre_cue = 0
-                elif pre_cue > self.stim_time + self.itis:  # so the cue doesn't show too late
-                    pre_cue = self.stim_time + self.itis
+                elif pre_cue > self.stim_time + self.success_window:  # so the cue doesn't show too late
+                    pre_cue = self.stim_time + self.success_window
 
                 psychopy.core.wait(pre_cue)  # wait until cue
-                clock = psychopy.core.Clock()  # if the stimulus is cued restart the clock when the cue appears
-
+                
+                #todo use enum
                 if self.cue.cue_type == 'sound':  # if the cue is set to be a sound
                     self.cue.play()  # plays the sound
                 elif self.cue.cue_type == 'image':  # if the cue is set to be an image
@@ -68,7 +67,8 @@ class Trial:
             else:
                 pre_cue = 0  # if the stimulus is not cued, just display it for 1 sec
 
-            rt_pressed_keys = psychopy.event.getKeys(timeStamped=clock)
+            clock.reset()  # if the stimulus is cued restart the clock when the cue appears
+            rt_pressed_keys = psychopy.event.getKeys(timeStamped = clock)
             if rt_pressed_keys:
                 print(rt_pressed_keys)
                 self.RT = rt_pressed_keys[0][1]  # records the RT for a button press
@@ -87,7 +87,7 @@ class Trial:
             psychopy.core.wait(self.iti)  # show cross for the amount of time set in ITI
             
             if self.RT != np.nan:            
-                if self.RT < (self.stim_time - pre_cue) + self.itis:
+                if (self.RT < (self.stim_time - pre_cue) + self.success_window) and (self.pressed_key == self.params['key_to_press']):
                     self.success = 1
                 else:
                     self.success = 0
@@ -104,6 +104,4 @@ class Trial:
             psychopy.core.wait(0)  # if the stimulus is not set to be shown, just skip this trial
                 
     def get_trial_data(self):
-        print ("RT is ", self.RT)
-        print ("PK is ", self.pressed_key)
         return self.stimulus.name, self.RT, self.success, self.pressed_key

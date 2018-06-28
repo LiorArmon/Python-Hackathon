@@ -15,8 +15,6 @@ from Trial import Trial
 class Block:
     def __init__(self, stim_list, df, params, win, cue):
         self.df = df
-        print(self.df.columns)
-        print(self.df["StimName"])
         self.win = win
         self.stim_list = stim_list
         self.success_count = 0
@@ -33,9 +31,8 @@ class Block:
             curr_trial.run_trial()
             self.trials.append(curr_trial)
     
-    def get_result(self):        
-        #todo take outto a seperate function:
-        #trials_data = []
+    def get_result(self):
+        
         trials_data = pd.DataFrame(data=None, index=None, columns=['trial', 'RT', 'success', 'key'])
 
         for trial in self.trials:
@@ -45,12 +42,9 @@ class Block:
                     self.success_count += 1
                 else:
                     self.failure_count += 1
-    #            trials_data.append(trial_data)    
-                print(trials_data)     
+       
                 new_row = {'trial': trial_data[0], 'RT': trial_data[1], 'success': trial_data[2], 'key': trial_data[3]}
          
                 trials_data = trials_data.append(new_row, ignore_index = True)
-                print(trials_data)
-               #{'trial': trial_data[0], 'RT': trial_data[1], 'success': trial_data[2], 'key': trial_data[3]})
         
         return trials_data
