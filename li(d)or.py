@@ -25,7 +25,7 @@ exp_data={"iti" : 1,
         "cue_image_name": 'astriks_gabor.jpg',
         "cue_sound_value":"G",
         "images_folder_path": "Images/",
-        "break_text": "BREAK:\n Press any key to continue when you are reday to start the next step",
+        "break_text": "BREAK:\n Press space bar to continue when you are reday to start the next step",
         "end_exp_img": "end_exp_img"}
 with open('data.yml', 'w') as outfile:
     yaml.dump(exp_data, outfile, default_flow_style=False)
