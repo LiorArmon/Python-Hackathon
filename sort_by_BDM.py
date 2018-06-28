@@ -80,11 +80,11 @@ class Sort_By_BDM:
 
 if __name__ == '__main__':
     # reading the results of the BDM
-    p = r'C:\Users\wolfi\Documents\PythonCourse\Final_project\Python-Hackathon\Only_6_snacks.txt'
+    p = r'C:\Users\nirav\OneDrive\מסמכים\GitHub\Python-Hackathon\Only_6_snacks.txt'
     file_path = Path(p)
 
     # reading and creating a dataframe with tag for each position of the sorted ranking
-    key_p = r'C:\Users\wolfi\Documents\PythonCourse\Final_project\Python-Hackathon\Only_6_snacks_ladder_key.xlsx'
+    key_p = r'C:\Users\nirav\OneDrive\מסמכים\GitHub\Python-Hackathon\Only_6_snacks_ladder_key.xlsx'
     key_p = Path(key_p)
     print(key_p)
     A = Sort_By_BDM(file_path, key_p)

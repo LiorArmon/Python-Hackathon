@@ -6,8 +6,17 @@ import psychopy.sound
 import os
 import BDM
 import sort_by_BDM
-import
+from Game import Game
+import yaml 
 
+
+
+with open("data.yml", 'r') as stream:
+   try:
+      params=(yaml.load(stream))
+   except yaml.YAMLError as exc:
+       print(exc)
+   
 # subject info window
 gui = psychopy.gui.Dlg()
 gui.addField("Subject ID:")
@@ -21,20 +30,28 @@ subj_age = gui.data[1]
 subj_gender = gui.data[2]
 #save as a metadata to the Results DataFrame
 
-cur_folder = r"C:\Users\wolfi\Documents\PythonCourse\Final_project\Python-Hackathon"
+cur_folder = os.getcwd()
 
-tx_file = BDM.main(subj_id)
+#tx_file = BDM.main(subj_id)
 
 # tx_file = r"C:\Users\wolfi\Documents\PythonCourse\Final_project\Python-Hackathon\Output\11_BDM1.txt"
-keys = r"C:\Users\wolfi\Documents\PythonCourse\Final_project\Python-Hackathon\Only_6_snacks_ladder_key.xlsx"
+keys = os.path.join(cur_folder, "Only_6_snacks_ladder_key.xlsx")
 
-A = sort_by_BDM.Sort_By_BDM(tx_file, keys)
-df = A.create_full_df()
-print(df)
+#A = sort_by_BDM.Sort_By_BDM(tx_file, keys)
+#df = A.create_full_df()
+#print(df)
 
+#todo deltte
+import  pandas as pd
+df = pd.read_csv("Only_6_sorted_BDM_mock_data.csv")
+#
 
-# load parameters
-
+game=Game(params, df, 1, 1) #todo no_block, interval from params
+print("RUN GAME")
+game.run_game()
+print("Bye")
+res_df = game.get_final_results()
+res_df.to_csv("res_df") #todo take from params
 # os.system('C:\\Users\wolfi\Documents\PythonCourse\Final_project\CAT\BDM.py')
 
 

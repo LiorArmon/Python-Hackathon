@@ -7,6 +7,7 @@ cue_size:
 - 400
 - 400
 cue_sound_value: G
+break_text : break
 cue_time: 0.1
 cue_type: sound
 end_exp_img: end_exp_img
@@ -15,7 +16,7 @@ iti: 1
 itis: 0.3
 key_to_press: k
 pre_cue: 0.7
-stim Position:
+stim_position:
 - 0
 - 0
 stim_size:
