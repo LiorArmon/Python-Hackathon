@@ -10,6 +10,7 @@ import yaml
 import json
 from pathlib import Path
 import random
+import Enum
 
 #creates a parameters file for demo purposes
 exp_data={"iti" : 1,
@@ -66,13 +67,13 @@ class Cue:
             image=os.path.normpath(self.im_folder_path + self.cue_image_name),  # opens a picture from Images folder
             units="pix",
             size=self.cue_size,
-            pos=self.cue_pos)
+            pos=self.cue_pos) #todo change to function from psychopy_utilities
         img.draw()
         win.flip()
         psychopy.core.wait(self.time)
 
     def play(self):
-        s = psychopy.sound.Sound(self, secs=self.time)  # creates a sound
+        s = psychopy.sound.Sound(params[cue_sound_value], secs=params[time])  # creates a sound #todo change to function from psychopy utilites
         s.play()
 
 cue=Cue(win,params)
@@ -119,7 +120,7 @@ class Trial:
         self.success = ()
         self.RT = ()
 
-    def create_fixation_cross(self):
+    def create_fixation_cross(self, win):
         fixation = psychopy.visual.ShapeStim(
             win=win,
             vertices=((0, -10), (0, 10), (0, 0), (-10, 0), (10, 0)),
@@ -128,7 +129,7 @@ class Trial:
             lineColor="white")
         return fixation
 
-    def create_psychopy_image(self):
+    def create_psychopy_image(self, win): #todo change to func from psychopy utilities
         img = psychopy.visual.ImageStim(
             win=win,
             image=os.path.normpath("Images/" + self.stimulus.name),  # opens a picture from Images folder
@@ -201,7 +202,17 @@ class Trial:
 
 
     def get_trial_data(self):
-        return self.stimulus.name, self.RT, self.success, self.keys[0]
+        stimulus name = self.stimulus.name
+        RT = self.RT
+        success = self.success
+        keys = self.keys[0]
+        return stimulus_name, RT, success, keys
+
+    class cue_type(Enum):
+        'sound' = 1
+        'image' = 2
+
+
 
 
 class Block:
