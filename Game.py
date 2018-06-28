@@ -41,16 +41,19 @@ class Game:
                 
                 psychopy.event.waitKeys(keyList=['space'])
             print("End block")
-
-        curr_final_results = pd.DataFrame(list_of_results[0])
-        print ("Generate results df")
-        for block_idx in range(self.no_of_blocks):
-            print("add bloclk " , block_idx)
-            if self.no_of_blocks > 0:
-                curr_final_results = pd.concat([curr_final_results, list_of_results[block_idx]],
-                                               keys=[f'block no.{block_idx}', f'block no.{block_idx+1}'])
-        self.final_results = curr_final_results
-        print("Dob]ne")
+        
+        self.results_df = pd.concat(list_of_results)
+        
+        #curr_final_results = pd.DataFrame(list_of_results[0])
+        #print ("Generate results df")
+        #for block_idx in range(self.no_of_blocks):
+        #    print("add block" , block_idx
+        #    curr_final_results = pd.concat([curr_final_results, list_of_results[block_idx]],
+        #                                       keys=[f'block no.{block_idx}', f'block no.{block_idx+1}'])
+        #self.final_results = curr_final_results
+        print(self.results_df)
+        print("Done")
+        
     def get_final_results(self):
-        return self.final_results
+        return self.results_df
     

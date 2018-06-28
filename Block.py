@@ -35,6 +35,7 @@ class Block:
     
     def get_result(self):        
         #todo take outto a seperate function:
+        #trials_data = []
         trials_data = pd.DataFrame(data=None, index=None, columns=['trial', 'RT', 'success', 'key'])
 
         for trial in self.trials:
@@ -44,7 +45,12 @@ class Block:
                     self.success_count += 1
                 else:
                     self.failure_count += 1
-                trials_data.append = (
-                {'trial': trial_data[0], 'RT': trial_data[1], 'success': trial_data[2], 'key': trial_data[3]})
+    #            trials_data.append(trial_data)    
+                print(trials_data)     
+                new_row = {'trial': trial_data[0], 'RT': trial_data[1], 'success': trial_data[2], 'key': trial_data[3]}
+         
+                trials_data = trials_data.append(new_row, ignore_index = True)
+                print(trials_data)
+               #{'trial': trial_data[0], 'RT': trial_data[1], 'success': trial_data[2], 'key': trial_data[3]})
         
         return trials_data
